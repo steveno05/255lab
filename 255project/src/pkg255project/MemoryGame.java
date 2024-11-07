@@ -8,12 +8,12 @@ package pkg255project;
  *
  * @author owenm
  */
-public class MemoryGame extends javax.swing.JFrame {
+public class TicTacToe extends javax.swing.JFrame {
 
     /**
      * Creates new form MemoryGame
      */
-    public MemoryGame() {
+    public TicTacToe() {
         initComponents();
     }
 
