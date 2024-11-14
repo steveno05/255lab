@@ -8,7 +8,17 @@ package pkg255project;
  *
  * @author lucywaters
  */
-public class Player {
-    
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+
+public abstract class Player {
+    public char symbol;
+    public Color color;
+
+    public abstract void startTurn();
 }
+
 
