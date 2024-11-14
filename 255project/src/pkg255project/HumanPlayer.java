@@ -4,6 +4,11 @@
  */
 package pkg255project;
 
+/**
+ *
+ * @author lucywaters
+ */
+
 import java.awt.*;
 
 public class HumanPlayer extends Player {

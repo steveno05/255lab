@@ -6,8 +6,9 @@ package pkg255project;
 
 /**
  *
- * @author owenm
+ * @author lucywaters
  */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
