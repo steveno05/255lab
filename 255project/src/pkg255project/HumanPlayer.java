@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class HumanPlayer extends Player {
     public HumanPlayer() {
-        symbol = 'X';
-        color = Color.RED; // Corrected syntax for setting color
+        symbol = 'x';
+        color = Color.MAGENTA; // Corrected syntax for setting color
     }
 
     @Override

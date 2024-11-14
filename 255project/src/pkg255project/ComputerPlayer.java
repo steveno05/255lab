@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class ComputerPlayer extends Player {
     public ComputerPlayer() {
-        symbol = 'O';
-        color = Color.BLUE; // Corrected syntax for setting color
+        symbol = 'o';
+        color = Color.CYAN; // Corrected syntax for setting color
     }
 
     @Override
