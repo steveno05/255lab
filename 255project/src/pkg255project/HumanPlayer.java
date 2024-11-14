@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class HumanPlayer extends Player {
     public HumanPlayer() {
-        symbol = 'x';
+        symbol = 'X';
         color = Color.MAGENTA; // Corrected syntax for setting color
     }
 
