@@ -16,14 +16,25 @@ import java.util.Random;
 
 public class TicTacToe extends JFrame {
     JButton[][] nineButtons;
+    JLabel scoreLabel;
     HumanPlayer humanPlayer;
     ComputerPlayer computerPlayer;
     Player currentTurn;
     Random randomNumbers;
     boolean gameWasWon;
+    int humanScore = 0;
+    int computerScore = 0;
 
     public TicTacToe() {
         nineButtons = new JButton[3][3];
+        scoreLabel = new JLabel("Score - You: 0 | Computer: 0");
+        scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        scoreLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        
+        setLayout(new BorderLayout());
+        JPanel boardPanel = new JPanel(new GridLayout(3, 3));
+        
+        // Initialize buttons and add them to the board panel
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 nineButtons[i][j] = new JButton(" ");
@@ -33,15 +44,19 @@ public class TicTacToe extends JFrame {
                         clickButton(evt);
                     }
                 });
-                add(nineButtons[i][j]);
+                boardPanel.add(nineButtons[i][j]);
             }
         }
+        
+        add(scoreLabel, BorderLayout.NORTH);
+        add(boardPanel, BorderLayout.CENTER);
+
         humanPlayer = new HumanPlayer();
         computerPlayer = new ComputerPlayer();
         currentTurn = humanPlayer;
         randomNumbers = new Random();
-        setLayout(new GridLayout(3, 3));
-        setSize(400, 400);
+
+        setSize(400, 450);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -60,15 +75,19 @@ public class TicTacToe extends JFrame {
             return false;
         } else {
             button.setText(String.valueOf(player.symbol));
-            button.setForeground(player.color); // Sets button text color to player's color
+            button.setForeground(player.color);
             changeTurn();
             return true;
         }
     }
 
     public void changeTurn() {
-        if (checkWin()) return;
-        currentTurn = (currentTurn == humanPlayer) ? computerPlayer : humanPlayer;
+        if (checkWin()) 
+            return;
+        if(currentTurn == humanPlayer)
+            currentTurn = humanPlayer;
+        else
+            currentTurn = computerPlayer;
     }
 
     public boolean checkWin() {
@@ -77,19 +96,23 @@ public class TicTacToe extends JFrame {
 
         if (whoWon == null && boardIsFull) {
             JOptionPane.showMessageDialog(null, "It's a tie!");
-            gameWasWon = true;
+            resetBoard();
             return true;
         }
 
         if (whoWon == humanPlayer) {
+            humanScore++;
             JOptionPane.showMessageDialog(null, "You won!");
-            gameWasWon = true;
+            updateScore();
+            resetBoard();
             return true;
         }
 
         if (whoWon == computerPlayer) {
+            computerScore++;
             JOptionPane.showMessageDialog(null, "Computer won!");
-            gameWasWon = true;
+            updateScore();
+            resetBoard();
             return true;
         }
 
@@ -97,30 +120,29 @@ public class TicTacToe extends JFrame {
     }
 
     public Player checkWhoWon() {
-        // Winning conditions for rows, columns, and diagonals
         for (int i = 0; i < 3; i++) {
-            if (!nineButtons[i][0].getText().equals(" ") &&
-                    nineButtons[i][0].getText().equals(nineButtons[i][1].getText()) &&
-                    nineButtons[i][0].getText().equals(nineButtons[i][2].getText())) {
+            if (!nineButtons[i][0].getText().equals(" ") && 
+                nineButtons[i][0].getText().equals(nineButtons[i][1].getText()) && 
+                nineButtons[i][0].getText().equals(nineButtons[i][2].getText())) {
                 return nineButtons[i][0].getText().equals("X") ? humanPlayer : computerPlayer;
             }
 
-            if (!nineButtons[0][i].getText().equals(" ") &&
-                    nineButtons[0][i].getText().equals(nineButtons[1][i].getText()) &&
-                    nineButtons[0][i].getText().equals(nineButtons[2][i].getText())) {
+            if (!nineButtons[0][i].getText().equals(" ") && 
+                nineButtons[0][i].getText().equals(nineButtons[1][i].getText()) && 
+                nineButtons[0][i].getText().equals(nineButtons[2][i].getText())) {
                 return nineButtons[0][i].getText().equals("X") ? humanPlayer : computerPlayer;
             }
         }
 
-        if (!nineButtons[0][0].getText().equals(" ") &&
-                nineButtons[0][0].getText().equals(nineButtons[1][1].getText()) &&
-                nineButtons[0][0].getText().equals(nineButtons[2][2].getText())) {
+        if (!nineButtons[0][0].getText().equals(" ") && 
+            nineButtons[0][0].getText().equals(nineButtons[1][1].getText()) && 
+            nineButtons[0][0].getText().equals(nineButtons[2][2].getText())) {
             return nineButtons[0][0].getText().equals("X") ? humanPlayer : computerPlayer;
         }
 
-        if (!nineButtons[0][2].getText().equals(" ") &&
-                nineButtons[0][2].getText().equals(nineButtons[1][1].getText()) &&
-                nineButtons[0][2].getText().equals(nineButtons[2][0].getText())) {
+        if (!nineButtons[0][2].getText().equals(" ") && 
+            nineButtons[0][2].getText().equals(nineButtons[1][1].getText()) && 
+            nineButtons[0][2].getText().equals(nineButtons[2][0].getText())) {
             return nineButtons[0][2].getText().equals("X") ? humanPlayer : computerPlayer;
         }
 
@@ -136,6 +158,21 @@ public class TicTacToe extends JFrame {
             }
         }
         return true;
+    }
+
+    public void resetBoard() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                nineButtons[i][j].setText(" ");
+                nineButtons[i][j].setForeground(Color.BLACK);
+            }
+        }
+        gameWasWon = false;
+        currentTurn = humanPlayer;
+    }
+
+    public void updateScore() {
+        scoreLabel.setText("Score - You: " + humanScore + " | Computer: " + computerScore);
     }
 
     public void runGame() {
@@ -156,14 +193,20 @@ public class TicTacToe extends JFrame {
     }
 
     public void takeComputerTurn() {
-        if (isFull()) return;
+        if (isFull()) 
+            return;
 
         boolean result = false;
         while (!result) {
             int row = randomNumbers.nextInt(3);
             int col = randomNumbers.nextInt(3);
             JButton buttonPicked = nineButtons[row][col];
+            
             result = placeSymbol(buttonPicked, computerPlayer);
+            
+            if (buttonPicked.getText().isEmpty()) {
+            result = placeSymbol(buttonPicked, computerPlayer);
+            }
         }
     }
 
@@ -404,3 +447,4 @@ public class TicTacToe extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea4;
     // End of variables declaration//GEN-END:variables
 }
+
