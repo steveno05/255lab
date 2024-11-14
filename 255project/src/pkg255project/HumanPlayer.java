@@ -11,6 +11,11 @@ public class HumanPlayer extends Player {
         symbol = 'X';
         color = Color.RED; // Corrected syntax for setting color
     }
+    
+     public HumanPlayer(char symbol, Color color) {
+        this.symbol = symbol;
+        this.color = color; // Corrected syntax for setting color
+    }
 
     @Override
     public void startTurn() {
