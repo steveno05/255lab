@@ -23,14 +23,14 @@ public class TicTacToe extends JFrame {
     Player currentTurn;
     Random randomNumbers;
     boolean gameWasWon;
-    int humanScore = 0;
-    int computerScore = 0;
+    int player1Score = 0;
+    int player2Score = 0;
 
 
     
     public TicTacToe(boolean isPVP) {
         nineButtons = new JButton[3][3];
-        scoreLabel = new JLabel("Score - You: 0 | Computer: 0");
+        scoreLabel = new JLabel("Score - You: 0 | Player 2: 0");
         scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 16));
         
@@ -127,7 +127,7 @@ public class TicTacToe extends JFrame {
         }
 
         if (whoWon == player1) {
-            humanScore++;
+            player1Score++;
             JOptionPane.showMessageDialog(null, "You won!");
             updateScore();
             resetBoard();
@@ -135,8 +135,8 @@ public class TicTacToe extends JFrame {
         }
 
         if (whoWon == player2) {
-            computerScore++;
-            JOptionPane.showMessageDialog(null, "Computer won!");
+            player2Score++;
+            JOptionPane.showMessageDialog(null, "Player 2 won!");
             updateScore();
             resetBoard();
             return true;
@@ -198,7 +198,7 @@ public class TicTacToe extends JFrame {
     }
 
     public void updateScore() {
-        scoreLabel.setText("Score - You: " + humanScore + " | Computer: " + computerScore);
+        scoreLabel.setText("Score - You: " + player1Score + " | Player 2: " + player2Score);
     }
 
     public void runGame() {
