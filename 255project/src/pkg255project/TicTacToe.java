@@ -14,7 +14,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import java.util.Scanner;
 
 public class TicTacToe extends JFrame {
     JButton[][] nineButtons;
@@ -95,11 +94,8 @@ public class TicTacToe extends JFrame {
     }
 
     public void changeTurn() {
-        System.out.println("changeTurn()   1");
         if (checkWin()) 
             return;
-        
-        System.out.println("changeTurn()    2");
         
         if(currentTurn == player1)
         {
@@ -235,13 +231,7 @@ public class TicTacToe extends JFrame {
             result = placeSymbol(buttonPicked, player2);
             }
         }
-        //Scanner scanner = new Scanner(System.in);
-        //scanner.nextLine();
         
-        //changeTurn();
     }
 
-    /*public static void main(String[] args) {
-        new TicTacToe(false).runGame();
-    }*/
 }

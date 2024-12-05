@@ -8,11 +8,7 @@ package pkg255project;
  *
  * @author lucywaters
  */
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Random;
 
 public abstract class Player {
     public char symbol;

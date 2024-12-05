@@ -83,9 +83,7 @@ public class PVPorPVC extends javax.swing.JFrame {
         // TODO add your handling code here:
         isPVP=true;
         TicTacToe ttt = new TicTacToe(isPVP);
-        System.out.println("I made it!");
         ttt.runGame();
-        System.out.println("Oh no, I stuck");
         
     }//GEN-LAST:event_PVPActionPerformed
 
@@ -93,9 +91,7 @@ public class PVPorPVC extends javax.swing.JFrame {
         // TODO add your handling code here:
         isPVP=false;
         TicTacToe ttt = new TicTacToe(isPVP);
-        System.out.println("I made it!");
         ttt.runGame();
-        System.out.println("Oh no, I stuck");
         dispose();
     }//GEN-LAST:event_PVCActionPerformed
 
